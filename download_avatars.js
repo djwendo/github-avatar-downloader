@@ -24,11 +24,11 @@ var avatars = [];
 getRepoContributors("jquery", "jquery", function(err, result) {
   console.log("Errors:", err);
   result.forEach(function(contributor) {
-    avatars.push(contributor.avatar_url);
+    downloadImageByURL(contributor.avatar_url, contributor.login);
   });
 });
 
-function downloadImagesByURL(url, filepath) {
+function downloadImageByURL(url, filepath) {
 
     request.get(url)
            .on('error', function (err) {
@@ -40,7 +40,7 @@ function downloadImagesByURL(url, filepath) {
            .on('end', function() {
              console.log('Download complete.');
            })
-           .pipe(fs.createWriteStream(filepath));
+           .pipe(fs.createWriteStream("./avatars/" + filepath + ".jpg"));
 }
 
 
