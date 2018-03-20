@@ -23,10 +23,14 @@ function getRepoContributors(repoOwner, repoName, cb) {
 var avatars = [];
 
 getRepoContributors(params[0], params[1], function(err, result) {
-  console.log("Errors:", err);
-  result.forEach(function(contributor) {
-    downloadImageByURL(contributor.avatar_url, contributor.login);
-  });
+  if (params.length == 2) {
+    console.log("Errors:", err);
+    result.forEach(function(contributor) {
+      downloadImageByURL(contributor.avatar_url, contributor.login);
+    });
+  } else {
+    console.log("Error: Incorrect input. Please check input information and try again.");
+  }
 });
 
 function downloadImageByURL(url, filepath) {
