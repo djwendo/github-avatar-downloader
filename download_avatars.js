@@ -20,7 +20,6 @@ function getRepoContributors(repoOwner, repoName, cb) {
   });
 }
 
-var avatars = [];
 
 getRepoContributors(params[0], params[1], function(err, result) {
   if (params.length == 2) {
@@ -34,18 +33,17 @@ getRepoContributors(params[0], params[1], function(err, result) {
 });
 
 function downloadImageByURL(url, filepath) {
-
-    request.get(url)
-           .on('error', function (err) {
-             throw err;
-           })
-           .on('response', function (response) {
-             console.log('Downloading image...');
-           })
-           .on('end', function() {
-             console.log('Download complete.');
-           })
-           .pipe(fs.createWriteStream("./avatars/" + filepath + ".jpg"));
+  request.get(url)
+         .on('error', function (err) {
+           throw err;
+         })
+         .on('response', function (response) {
+           console.log('Downloading image...');
+         })
+         .on('end', function() {
+           console.log('Download complete.');
+         })
+         .pipe(fs.createWriteStream("./avatars/" + filepath + ".jpg"));
 }
 
 
